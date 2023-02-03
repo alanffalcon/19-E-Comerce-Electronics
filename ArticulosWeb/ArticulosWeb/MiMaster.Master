@@ -1,0 +1,82 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MiMaster.master.cs" Inherits="ArticulosWeb.MiMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>E-Comerce Web</title>
+    <!-- BOOTSTRAP META + CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- ICON - NO ANDA! -->
+    <link href="logo.ico" rel="./icon" />
+
+    <!-- CSS -->
+    <link href="CSS/styles.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <form id="form1" runat="server">
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="Default.aspx">E-Comerce</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Default.aspx">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ArticuloLista.aspx">Articulos</a>
+                    </li>                                       
+                </ul>
+            
+                <!-- LOGIN -->
+                <div class="d-flex">              
+                     <% if (!negocio.Seguridad.sesionActiva(Session["cliente"])){ %>
+                            <a href="Login.aspx" class="btn btn-success me-2">Login</a>
+                    <%
+                       }
+                       else{
+                    %>
+                            <asp:Button id="btnSalir" runat="server" Text="Salir" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click"/>
+                            <asp:Label id="lblUser" Text="user" CssClass="text-light m-auto me-2" runat="server" />
+                     <%} %>
+                    <asp:Image ID="imgAvatar" style="height:40px; width:40px; border-radius:50%;" 
+                        runat="server" />                
+                </div>                            
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Place Holder -->
+    <div class="container">
+        <hr />
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        <br />
+    </div>
+
+    <!-- Footer -->            
+    <footer>
+        <p class="f-1">**Este es mi E-Comerce. Todos los proyectos fueron realizados como practicas o trabajos.</p>
+        <p class="f-2">© Creado por Alan Facundo Falcon</p>    
+    </footer>   
+
+
+    </form>
+    <!-- BOOTSTRAP JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</html>
